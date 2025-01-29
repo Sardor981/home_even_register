@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:home_heven_app/features/auth/domain/usecase/login_usecase.dart';
 import 'package:home_heven_app/features/auth/domain/usecase/register_usecase.dart';
@@ -21,11 +20,14 @@ class AuthProvider extends ChangeNotifier {
         await loginUsecase.call(phoneNumber: phoneNumber, password: password);
     isloading = false;
     notifyListeners();
-    return result.fold((l) => message=l, (r) => message = "Successfully login",);
+    return result.fold(
+      (l) => message = l,
+      (r) => message = "Successfully login",
+    );
   }
 
 // register
-  Future<bool> registerWithPhone({
+  Future<void> registerWithPhone({
     required String phoneNumber,
     required String password,
     required String email,
@@ -36,6 +38,9 @@ class AuthProvider extends ChangeNotifier {
         phoneNumber: phoneNumber, password: password, email: email);
     isloading = false;
     notifyListeners();
-    return result;
+    return result.fold(
+      (l) => message = l,
+      (r) => message = "Succesfully register",
+    );
   }
 }

@@ -22,7 +22,8 @@ class textControllerWidget extends StatelessWidget {
           child: Padding(padding: const EdgeInsets.all(5.0), child: icon),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: const Color.fromARGB(255, 18, 18, 18)),
+          borderSide:
+              BorderSide(color: const Color.fromARGB(255, 105, 238, 198)),
           borderRadius: BorderRadius.circular(8.0),
         ),
         focusedBorder: OutlineInputBorder(

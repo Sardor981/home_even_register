@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:home_heven_app/core/exceptions/custom_exeptions.dart';
 import 'package:home_heven_app/core/prefs_keys.dart';
@@ -13,7 +12,7 @@ sealed class AuthRemoteDataSource {
     required String phoneNumber,
     required String password,
   });
-  Future<bool> register({
+  Future<bool?> register({
     required String phoneNumber,
     required String password,
     required String email,
@@ -56,17 +55,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } on DioException catch (e) {
       log("Error happened while logging in: $e");
       if (e.response?.statusCode == 400) {
-        log("user not found");
-        throw ServerExeption(errorMessage: 'user not found', statusCode: 400);
+        log("User not found");
+        throw ServerExeption(
+            errorMessage: 'User not found ,Please try again', statusCode: 400);
       }
     } catch (e) {
       log("error happpened while logging in:$e");
       throw ServerExeption(errorMessage: "Please try again.", statusCode: 400);
     }
+    return null;
   }
 
+// register
   @override
-  Future<bool> register({
+  Future<bool?> register({
     required String phoneNumber,
     required String password,
     required String email,
@@ -94,9 +96,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return true;
       }
       return false;
-    } catch (e) {
+    } on DioException catch (e) {
       log("Error happened whille register :$e");
-      throw Exception(e);
+      if (e.response?.statusCode == 400) {
+        log("User already exist");
+        throw ServerExeption(
+            errorMessage: "User already exist", statusCode: 400);
+      }
+    } catch (e) {
+      log("Error happpening while register :$e");
+      throw ServerExeption(errorMessage: "Please try again", statusCode: 400);
     }
+    return null;
   }
 }

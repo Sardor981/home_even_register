@@ -7,7 +7,7 @@ abstract class AuthRepo {
   });
 
   // register
-  Future<bool> register({
+  Future<Either<dynamic,bool>> register({
     required String phoneNumber,
     required String password,
     required String email,

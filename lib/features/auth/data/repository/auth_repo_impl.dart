@@ -25,12 +25,17 @@ class AuthRepoImpl implements AuthRepo {
 
 // registeer
   @override
-  Future<bool> register({
+  Future<Either<dynamic, bool>> register({
     required String phoneNumber,
     required String password,
     required String email,
   }) async {
-    return await authRemoteDataSource.register(
-        phoneNumber: phoneNumber, password: password, email: email);
+    try {
+      final bool = await authRemoteDataSource.register(
+          phoneNumber: phoneNumber, password: password, email: email);
+      return Right(bool!);
+    } on ServerExeption catch (e) {
+      return left(e.errorMessage);
+    }
   }
 }

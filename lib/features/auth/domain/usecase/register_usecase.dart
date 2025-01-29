@@ -1,11 +1,12 @@
 
+import 'package:dartz/dartz.dart';
 import 'package:home_heven_app/features/auth/domain/repository/auth_repo.dart';
 
 class RegisterUsecase {
   final AuthRepo authRepo;
 
   RegisterUsecase({required this.authRepo});
-  Future<bool> callforRegister({
+  Future<Either<dynamic,bool>> callforRegister({
     
      required String phoneNumber,
     required String password,
