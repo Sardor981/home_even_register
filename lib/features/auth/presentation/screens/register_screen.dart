@@ -10,6 +10,7 @@ import 'package:home_heven_app/features/auth/presentation/widgets/password_contr
 import 'package:home_heven_app/features/auth/presentation/widgets/social_widgets.dart';
 import 'package:home_heven_app/features/auth/presentation/widgets/text_widget.dart';
 import 'package:home_heven_app/features/auth/presentation/widgets/textcontroller_widget.dart';
+import 'package:home_heven_app/features/home/presentation/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
